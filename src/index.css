@@ -1,0 +1,19 @@
+@import '@trimble-oss/moduswebcomponents/modus-wc-styles.css';
+@import "tailwindcss";
+
+:root {
+  --padding-card: 1rem;
+}
+
+body {
+  background-color: var(--modus-wc-color-base-page);
+  color: var(--modus-wc-color-base-content);
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.modus-wc-card {
+  margin-bottom: var(--modus-wc-spacing-xl);
+}
