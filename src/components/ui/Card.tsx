@@ -7,11 +7,11 @@ export interface CardProps {
   header?: string
   className?: string
   layout?: 'vertical' | 'horizontal'
-  padding?: 'normal' | 'compact'
+  padding?: 'comfortable' | 'compact'
 }
 
-export const Card = ({ children, header, className, layout, padding = 'normal' }: CardProps) => (
-  <ModusWcCard bordered={false} layout={layout} padding={padding} customClass={className}>
+export const Card = ({ children, header, className, layout, padding = 'comfortable' }: CardProps) => (
+  <ModusWcCard bordered={true} layout={layout} padding={padding} customClass={className}>
     {header && (
       <div slot="header" style={{ padding: 'var(--padding-card)' }}>
         <Typography hierarchy="h3" size="lg">

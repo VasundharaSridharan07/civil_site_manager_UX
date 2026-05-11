@@ -12,6 +12,7 @@ export interface SelectProps {
   value?: string
   disabled?: boolean
   required?: boolean
+  bordered?: boolean
   /** Error text shown below the select */
   errorText?: string
   /** Helper text shown below the select */
@@ -25,6 +26,7 @@ export const Select = ({
   value = '',
   disabled = false,
   required = false,
+  bordered = true,
   errorText,
   helperText,
   onChange,
@@ -35,6 +37,7 @@ export const Select = ({
     value={value}
     disabled={disabled}
     required={required}
+    bordered={bordered}
     feedback={
       errorText
         ? { level: 'error', message: errorText }

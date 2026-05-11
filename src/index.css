@@ -17,3 +17,40 @@ p {
 .modus-wc-card {
   margin-bottom: var(--modus-wc-spacing-xl);
 }
+
+/* ── Responsive page content wrapper ── */
+.page-content {
+  min-height: calc(100vh - 64px);
+  background-color: var(--modus-wc-color-base-page);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 16px 48px;
+}
+@media (min-width: 640px)  { .page-content { padding: 40px 24px 48px; } }
+@media (min-width: 768px)  { .page-content { padding: 40px 40px 48px; } }
+@media (min-width: 1024px) { .page-content { padding: 40px 64px 48px; } }
+@media (min-width: 1280px) { .page-content { padding: 40px 80px 48px; } }
+
+/* ── Project card — hover / active states (mirrors Modus bordered card) ── */
+.project-card {
+  transition: box-shadow 120ms ease;
+}
+.project-card:hover {
+  box-shadow: 0 2px 8px 0 rgba(54, 53, 69, 0.12);
+}
+.project-card:active {
+  box-shadow: none;
+}
+
+/* ── Project cards grid — fixed columns per Modus/Tailwind breakpoint ── */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding: 4px 0;
+}
+@media (min-width: 640px)  { .project-grid { grid-template-columns: repeat(2, 284px); } }
+@media (min-width: 768px)  { .project-grid { grid-template-columns: repeat(2, 332px); } }
+@media (min-width: 1024px) { .project-grid { grid-template-columns: repeat(3, 280px); } }
+@media (min-width: 1280px) { .project-grid { grid-template-columns: repeat(4, 262px); } }
+@media (min-width: 1536px) { .project-grid { grid-template-columns: repeat(4, 326px); } }

@@ -1,78 +1,18 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button, Icon, Select } from '../components/ui'
 import { ProjectCard } from '../components/ProjectCard'
-
-const REGION_OPTIONS = [
-  { label: 'North America', value: 'north-america' },
-  { label: 'Europe', value: 'europe' },
-  { label: 'Asia Pacific', value: 'asia-pacific' },
-]
-
-const PROJECTS = [
-  {
-    id: '1',
-    name: 'Sanders Dam Project',
-    account: 'Sanderson Account',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/dd3d393b-c90b-4e11-a171-236ac234b8ca',
-  },
-  {
-    id: '2',
-    name: 'Green Line Phase 2',
-    account: 'Sanderson Account',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/b50dd6ef-3b57-41f1-bb5a-0452cfac7f4a',
-  },
-  {
-    id: '3',
-    name: 'Summit Dam Fix',
-    account: 'Turner Construction',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/71f09f6b-21bc-4d62-be4b-0770b2c2faa2',
-  },
-  {
-    id: '4',
-    name: 'East Flood Works',
-    account: 'Turner Construction',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/aee1ef82-6ffa-45e6-b102-00888293be12',
-  },
-  {
-    id: '5',
-    name: 'Bassin Project',
-    account: 'Sanderson Account',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/9b6f9540-2e95-469e-8f87-326a24b2fb99',
-  },
-  {
-    id: '6',
-    name: "David's Project",
-    account: 'Sanderson Account',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/dd3d393b-c90b-4e11-a171-236ac234b8ca',
-  },
-  {
-    id: '7',
-    name: 'Riverway Extension',
-    account: 'Sanderson Account',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/71f09f6b-21bc-4d62-be4b-0770b2c2faa2',
-  },
-]
+import { PROJECTS, REGION_OPTIONS } from '../data/projects'
 
 type ViewMode = 'grid' | 'list' | 'map'
 
 export const Home = () => {
+  const navigate = useNavigate()
   const [viewMode, setViewMode] = useState<ViewMode>('grid')
   const [region, setRegion] = useState('north-america')
 
   return (
-    <div
-      style={{
-        minHeight: 'calc(100vh - 64px)',
-        backgroundColor: 'var(--modus-wc-color-base-page)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
-        paddingTop: '48px',
-        paddingLeft: '80px',
-        paddingRight: '80px',
-        paddingBottom: '48px',
-      }}
-    >
+    <div className="page-content">
       {/* Title row */}
       <div
         style={{
@@ -81,6 +21,7 @@ export const Home = () => {
           justifyContent: 'space-between',
           height: '48px',
           flexShrink: 0,
+          marginBottom: '16px',
         }}
       >
         <h2
@@ -161,27 +102,20 @@ export const Home = () => {
         <Select
           options={REGION_OPTIONS}
           value={region}
+          bordered={false}
           onChange={setRegion}
         />
       </div>
 
       {/* Project cards grid */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '50px',
-          paddingTop: '12px',
-          paddingBottom: '12px',
-        }}
-      >
+      <div className="project-grid">
         {PROJECTS.map((project) => (
           <ProjectCard
             key={project.id}
             name={project.name}
             account={project.account}
             imageUrl={project.imageUrl}
-            onClick={() => {}}
+            onClick={() => navigate(`/project/${project.id}`)}
           />
         ))}
       </div>
