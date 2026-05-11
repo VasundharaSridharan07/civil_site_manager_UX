@@ -7,4 +7,5 @@ export default defineConfig({
     tailwindcss(),
     react(),
   ],
+  base: process.env.VITE_BASE_PATH || "/civil_site_manager_UX",
 })
