@@ -3,9 +3,9 @@ import { AppConfigProvider } from './context/AppConfigContext'
 import { Navbar } from './components/ui'
 import { Home } from './pages/Home'
 import { WorksProjectDetail } from './pages/WorksProjectDetail'
+import { Project3DViewer } from './pages/Project3DViewer'
 import { ConfigPage } from './pages/ConfigPage'
 import { ConnectHome } from './pages/ConnectHome'
-import { ConnectProjectDetail } from './pages/ConnectProjectDetail'
 
 const WorksLayout = () => (
   <div
@@ -24,18 +24,20 @@ const WorksLayout = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/project/:id" element={<WorksProjectDetail />} />
+        <Route path="/project/:id/3d-viewer" element={<Project3DViewer />} />
         <Route path="/config" element={<ConfigPage />} />
       </Routes>
     </main>
   </div>
 )
 
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 const App = () => (
   <AppConfigProvider>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
         <Route path="/connect" element={<ConnectHome />} />
-        <Route path="/connect/project/:id" element={<ConnectProjectDetail />} />
         <Route path="/*" element={<WorksLayout />} />
       </Routes>
     </BrowserRouter>

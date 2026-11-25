@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Button, Icon, Navbar, Select } from '../components/ui'
 import { ProjectCard } from '../components/ProjectCard'
 import { PROJECTS, REGION_OPTIONS } from '../data/projects'
@@ -7,7 +6,6 @@ import { PROJECTS, REGION_OPTIONS } from '../data/projects'
 type ViewMode = 'grid' | 'list' | '3d'
 
 export const ConnectHome = () => {
-  const navigate = useNavigate()
   const [viewMode, setViewMode] = useState<ViewMode>('grid')
   const [region, setRegion] = useState('north-america')
 
@@ -115,7 +113,7 @@ export const ConnectHome = () => {
               key={project.id}
               name={project.name}
               imageUrl={project.imageUrl}
-              onClick={() => navigate(`/connect/project/${project.id}`)}
+              onClick={() => {}}
             />
           ))}
         </div>

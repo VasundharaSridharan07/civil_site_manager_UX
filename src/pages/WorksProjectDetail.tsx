@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Button, Icon } from '../components/ui'
 import { WorksSidebar } from '../components/WorksSidebar'
+import { ProjectMapView } from '../components/ProjectMapView'
 import { PROJECTS } from '../data/projects'
 import { DEVICES } from '../data/devices'
 import type { Device } from '../data/devices'
@@ -283,7 +284,7 @@ const PropRow = ({
 export const WorksProjectDetail = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const [activeNav, setActiveNav] = useState('devices')
+  const [activeNav, setActiveNav] = useState('map')
   const [selectedDeviceId, setSelectedDeviceId] = useState<string | null>(DEVICES[0]?.id ?? null)
   const [search, setSearch] = useState('')
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list')
@@ -311,11 +312,40 @@ export const WorksProjectDetail = () => {
       <WorksSidebar
         projectName={projectName}
         activeId={activeNav}
-        onSelect={setActiveNav}
+        onSelect={(navId) => {
+          if (navId === '3d-viewer') {
+            navigate(`/project/${id}/3d-viewer`)
+            return
+          }
+          setActiveNav(navId)
+        }}
         onMyProjects={() => navigate('/')}
       />
 
-      {/* Center content */}
+      {activeNav === 'map' && (
+        <ProjectMapView
+          projectName={projectName}
+          onProjectsCrumb={() => navigate('/')}
+        />
+      )}
+
+      {activeNav !== 'map' && activeNav !== 'devices' && (
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#f7f7fa',
+            color: SUBTLE_TEXT,
+            fontSize: '14px',
+          }}
+        >
+          <p style={{ margin: 0 }}>The {activeNav} view is not implemented yet.</p>
+        </div>
+      )}
+
+      {activeNav === 'devices' && (
       <div
         style={{
           flex: 1,
@@ -536,9 +566,9 @@ export const WorksProjectDetail = () => {
           </div>
         </div>
       </div>
+      )}
 
-      {/* Right panel */}
-      {selectedDevice && (
+      {activeNav === 'devices' && selectedDevice && (
         <DeviceInfoPanel
           device={selectedDevice}
           onClose={() => setSelectedDeviceId(null)}
