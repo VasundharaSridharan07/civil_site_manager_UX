@@ -7,6 +7,12 @@ export interface ProjectCardProps {
   onClick?: () => void
 }
 
+const resolveAssetUrl = (url: string) => {
+  if (/^(?:[a-z][a-z\d+\-.]*:|\/\/)/i.test(url)) return url
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+  return `${base}/${url.replace(/^\//, '')}`
+}
+
 /**
  * Project thumbnail card — 312×360px with image hero and text footer.
  * Matches Figma node I201:1238 spec exactly.
@@ -41,7 +47,7 @@ export const ProjectCard = ({ name, account, imageUrl, onClick }: ProjectCardPro
       }}
     >
       <img
-        src={imageUrl}
+        src={resolveAssetUrl(imageUrl)}
         alt={name}
         loading="lazy"
         onError={(e) => {
